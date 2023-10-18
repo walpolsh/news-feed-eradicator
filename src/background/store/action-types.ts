@@ -17,7 +17,24 @@ export enum BackgroundActionType {
 	PERMISSIONS_CHECK = 'permissions/check',
 	PERMISSIONS_UPDATE = 'permissions/update',
 	SITES_SET_STATE = 'sites/set_state',
+	TOGGLE_ACTIVE_DAY = 'TOGGLE_ACTIVE_DAY',
+	SET_START_TIME = 'SET_START_TIME',
+	SET_END_TIME = 'SET_END_TIME',
 }
+export type ToggleActiveDay = {
+	type: BackgroundActionType.TOGGLE_ACTIVE_DAY;
+	day: string;
+};
+
+export type SetStartTime = {
+	type: BackgroundActionType.SET_START_TIME;
+	time: string;
+};
+
+export type SetEndTime = {
+	type: BackgroundActionType.SET_END_TIME;
+	time: string;
+};
 
 export type BackgroundActionObject =
 	| FeatureIncrement
@@ -32,7 +49,10 @@ export type BackgroundActionObject =
 	| SettingsLoaded
 	| PermissionsCheck
 	| PermissionsUpdate
-	| SitesSetState;
+	| SitesSetState
+	| ToggleActiveDay
+	| SetStartTime
+	| SetEndTime;
 
 export type FeatureIncrement = { type: BackgroundActionType.FEATURE_INCREMENT };
 

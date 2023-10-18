@@ -1,7 +1,11 @@
 import { CustomQuote } from '../../quote';
 import { getBrowser } from '../../webextension';
 import { SiteId, Sites } from '../../sites';
+type DayState = {
+	isActive: boolean;
+};
 
+type Days = Record<string, DayState>;
 export namespace Settings {
 	type V1 = {
 		version: 1;
@@ -11,11 +15,22 @@ export namespace Settings {
 		hiddenBuiltinQuotes: number[];
 		customQuotes: CustomQuote[];
 		sites: Partial<SitesState>;
+		activeDays: Days;
+		startTime: string;
+		endTime: string;
 	};
-
+	export type Days = {
+		Monday: DayState;
+		Tuesday: DayState;
+		Wednesday: DayState;
+		Thursday: DayState;
+		Friday: DayState;
+		Saturday: DayState;
+		Sunday: DayState;
+	};
 	export type SitesState = Record<SiteId, SiteState>;
 
-	const defaults: V1 = {
+	export const defaults: V1 = {
 		version: 1,
 		showQuotes: true,
 		builtinQuotesEnabled: true,
@@ -23,6 +38,17 @@ export namespace Settings {
 		hiddenBuiltinQuotes: [],
 		customQuotes: [],
 		sites: {},
+		activeDays: {
+			Monday: { isActive: false },
+			Tuesday: { isActive: false },
+			Wednesday: { isActive: false },
+			Thursday: { isActive: false },
+			Friday: { isActive: false },
+			Saturday: { isActive: false },
+			Sunday: { isActive: false },
+		},
+		startTime: '09:00',
+		endTime: '17:00',
 	};
 	export const defaultSites = (): SitesState => {
 		const sites: SitesState = {} as SitesState;

@@ -20,6 +20,9 @@ const getSettings = (state: SettingsState): Settings.T => {
 		hiddenBuiltinQuotes: state.hiddenBuiltinQuotes,
 		customQuotes: state.customQuotes,
 		sites: state.sites,
+		activeDays: state.activeDays,
+		startTime: state.startTime,
+		endTime: state.endTime,
 	};
 };
 
@@ -101,6 +104,9 @@ const loadSettings: BackgroundEffect = (store) => async (action) => {
 			customQuotes: settings.customQuotes,
 			sites,
 			permissions,
+			activeDays: settings.activeDays,
+			startTime: settings.startTime,
+			endTime: settings.endTime,
 		};
 
 		store.dispatch({

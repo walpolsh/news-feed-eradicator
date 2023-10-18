@@ -8,7 +8,6 @@ import { combineReducers } from 'redux';
 import { Permissions } from '../../webextension';
 import { SiteId } from '../../sites';
 import { Settings } from './index';
-
 function showQuotes(state = true, action: ActionObject) {
 	switch (action.type) {
 		case ActionType.QUOTES_SHOW_TOGGLE:
@@ -102,6 +101,9 @@ export type SettingsState = {
 	customQuotes: CustomQuote[];
 	sites: Record<SiteId, Settings.SiteState>;
 	permissions: Permissions;
+	activeDays: Settings.Days;
+	startTime: string;
+	endTime: string;
 };
 
 export type BackgroundState =
@@ -119,6 +121,9 @@ const settingsReducer = combineReducers({
 	customQuotes,
 	sites,
 	permissions,
+	activeDays,
+	startTime,
+	endTime,
 });
 
 export default (
@@ -139,3 +144,40 @@ export default (
 	}
 	return state;
 };
+
+function activeDays(
+	state: Settings.Days | undefined = Settings.defaults.activeDays,
+	action: ActionObject
+): Settings.Days {
+	switch (action.type) {
+		case ActionType.TOGGLE_ACTIVE_DAY:
+			const day = action.day;
+			return {
+				...state,
+				[day]: { isActive: !state[day].isActive },
+			};
+	}
+	return state || {};
+}
+
+function startTime(
+	state: string | undefined = Settings.defaults.startTime,
+	action: ActionObject
+): string {
+	switch (action.type) {
+		case ActionType.SET_START_TIME:
+			return action.time;
+	}
+	return state || '';
+}
+
+function endTime(
+	state: string | undefined = Settings.defaults.endTime,
+	action: ActionObject
+): string {
+	switch (action.type) {
+		case ActionType.SET_END_TIME:
+			return action.time;
+	}
+	return state || '';
+}

@@ -18,7 +18,9 @@ export enum ActionType {
 	UI_OPTIONS_TAB_SHOW = 'ui/options/tab/show',
 	UI_OPTIONS_QUOTE_TAB_SHOW = 'ui/options/quote/tab/show',
 	UI_SITES_SITE_CLICK = 'sites/site/click',
-
+	TOGGLE_ACTIVE_DAY = 'TOGGLE_ACTIVE_DAY',
+	SET_START_TIME = 'SET_START_TIME',
+	SET_END_TIME = 'SET_END_TIME',
 	/**
 	 * Show the confirmation for disabling News Feed Eradicator for a site
 	 */
