@@ -158,6 +158,7 @@ const InfoPanel = (store: Store) => {
 			h('div.flex.justify-center.h-stack-2', [
 				Tab('sites', 'Sites'),
 				Tab('quotes', 'Quotes'),
+				Tab('working-hours', 'Working Hours'),
 				Tab('about', 'About'),
 			]),
 
